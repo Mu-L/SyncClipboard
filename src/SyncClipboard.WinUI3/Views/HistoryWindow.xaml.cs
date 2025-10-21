@@ -41,6 +41,7 @@ public sealed partial class HistoryWindow : Window, IWindow
         this.AppWindow.Resize(new SizeInt32(1200, 800));
 
         InitializeComponent();
+        SetWindowMinSize();
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(_TitleBar);
@@ -406,5 +407,17 @@ public sealed partial class HistoryWindow : Window, IWindow
     public void SetTopmost(bool topmost)
     {
         this.SetIsAlwaysOnTop(topmost);
+    }
+
+    private void SetWindowMinSize()
+    {
+        _FilterSelectorBar.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+        _ButtonArea.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+
+        var tabWidth = _FilterSelectorBar.DesiredSize.Width;
+        var buttonWidth = _ButtonArea.DesiredSize.Width;
+        var manager = WinUIEx.WindowManager.Get(this);
+        manager.MinWidth = tabWidth + buttonWidth * 2;
+        manager.MinHeight = _FilterSelectorBar.DesiredSize.Height;
     }
 }

@@ -75,7 +75,10 @@
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
-                <Button Width="24" Height="24" VerticalAlignment="Center" Command="{x:Bind _viewModel.CloseCommand}">
+                <Button Width="24"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Command="{x:Bind _viewModel.CloseCommand}">
                     <FontIcon Glyph="&#xE711;" />
                 </Button>
             </StackPanel>
